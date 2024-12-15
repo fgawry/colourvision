@@ -22,7 +22,7 @@ library(colourvision)
 <br>
 <br>
 
-#Introduction
+# Introduction
 This is a practical user guide to `colourvision`. Colour vision models allow appraisals of colour patches independently of the human vision. More detailed explanation on colour vision models is provided elsewhere [@Kelber:2003p1255; @ENDLER:2005p538; @Osorio:2008ep; @Kemp:2015jf; @Renoult:2017dv; @Gawryszewski:gt].
 
 Package `colourvision` has functions to the three most commonly used models by ecologists, behavioural ecologists, and evolutionary biologists [@Chittka:1992p186; @Vorobyev:1998p1813; @Vorobyev:1998p335; @ENDLER:2005p538], and a generic function to build alternative models based on the same set of general assumptions. These models have been extended to accept any number of photoreceptor types, i.e., the same model may be applied to a dichromatic mammal and a tentatively pentachromatic dipterean. Modelling functions provide a comprehensive output, which may be visualised into publication-ready colour space plots. 
@@ -30,10 +30,10 @@ Package `colourvision` has functions to the three most commonly used models by e
 <br>
 <br>
 
-#Data handling
+# Data handling
 This section shows functions applied to colour data before model calculations. 
 
-##`spec.denoise()`
+## `spec.denoise()`
 
 Applies a `smooth.spline` for a data frame containing spectrometric data. Useful when raw data from spectrophotometer output are noisy.
 ```{r echo=FALSE}
@@ -54,7 +54,7 @@ plot(spider.smooth, ylim=c(0,50), xlim=c(300,700), type="l",
 <br>
 <br>
 
-##`photor()`
+## `photor()`
 Photoreceptor sensitivity curves are seldom available, but they can be estimated using the wavelength of maximum sensitivity [$\lambda_{max}$; @Govardovskii:2000tf]. `photor` generates photoreceptor sensitivity spectra based on $\lambda_{max}$ values:
 
 ```{r}
@@ -74,7 +74,7 @@ lines(human[,4]~human[,1], col="red", lwd=2)
 <br>
 <br>
 
-##`logistic()`
+## `logistic()`
 
 Creates a sigmoid reflectance curve. Useful for simulations using colour vision models [see for instance @Gawryszewski:gt].
 
@@ -88,7 +88,7 @@ plot(R, ylim=c(0,100),xlim=c(300,700), xlab="Wavelength (nm)", ylab="Reflectance
 <br>
 <br>
 
-##`energytoflux()`
+## `energytoflux()`
 
 Photoreceptors respond to photon numbers, not photon energy [@Endler:1990p1253]. `energytoflux` converts Irradiance datum from energy units ($uW \times cm^{-2} \times nm^{-1}$) to quantum flux units ($umol \times m^{-2} \times s^{-1}$).
 
@@ -112,8 +112,8 @@ plot(D65photon, xlim=c(300,700), type="l",
 <br>
 
 
-#Colour Vision Models
-##The Basics
+# Colour Vision Models
+## The Basics
 This section serves as a brief introduction to colour vision models, and to introduce internal package functions used to calculate colour vision models. For model specific functions (`CTTKmodel`, `EMmodel`, `RNLmodel`, `RNLthres`, and `GENmodel`), please refer to further sections in this manual.
 
 Colour vision models require a minimum of four parameters for calculations: (1) photoreceptor sensitivity curves, (2) background reflectance spectrum, (3) illuminant spectrum, and (4) the stimulus reflectance spectrum (stimulus). Receptor noise limited models also require photoreceptor noise for each photoreceptor type.
@@ -182,7 +182,7 @@ For instance, `colour_space` generates a general colour space based on any numbe
 colour_space(n=3, type="length", length=1, edge=NA, q=c(Qr1,Qr2,Qr3))
 ```
 
-##Chittka (1992) Colour Hexagon
+## Chittka (1992) Colour Hexagon
 @Chittka:1992p186 developed a colour vision model based on trichromatic hymenopteran vision. This model has later been extended to tetrachromatic avian vision [@Thery:2002p163]. In `colourvision` this model has been further extended to accept any number of photoreceptor types ($n\geq2$).
 
 Photoreceptor outputs ($E_i$) are calculated by:
@@ -201,7 +201,7 @@ $${X_2 = \frac{5\sqrt{2}}{2\sqrt{3}\sqrt{5}}(E_3-\frac{E_1+E_2}{2})}$$
 $${X_3 = \frac{5\sqrt{3}}{4\sqrt{5}}(E_4-\frac{E_1+E_2+E_3}{3})}$$
 $${X_4 = E_5-\frac{E1+E2+E3+E4}{4}}$$
 
-###`CTTKmodel()`
+### `CTTKmodel()`
 @Chittka:1992p186 model is represented by function `CTTKmodel`. This functions needs (1) photoreceptor sensitivities curves, (2) background reflectance spectrum, (3) illuminant spectrum, and (4) stimulus reflectance spectra:
 
 A worked example:
@@ -291,7 +291,7 @@ Model output provides the relative quantum catches (Qr), photoreceptor outputs (
 knitr::kable(head(CTTKmodel3), caption = "Table 1. `CTTKmodel()` output of a trichromatic animal, showing the relative quantum catches (Qr), photoreceptor outputs (E), colour locus coordinates (X), and the chromaticity distance of stimulus in relation to the background (deltaS)")
 ```
 
-##Endler & Mielke (2005)
+## Endler & Mielke (2005)
 The original model is available for tetrachromatic animals only. In `colourvision`, the model was extended to any number of photoreceptors [@Gawryszewski:gt; see also @Pike:2012tv].
 
 First, relative quantum catches are log-transformed:
@@ -318,7 +318,7 @@ whereas if the edge length is preserved, $X_1$ is found by:
 
 $$\frac{1}{2}\sqrt{\frac{3}{2}}(E_2-E_1)$$
 
-###`EMmodel()`
+### `EMmodel()`
 
 Using the same data as in `CTTKmodel()` example:
 
@@ -332,7 +332,7 @@ Model output provides the relative quantum catches (Qr), photoreceptor outputs (
 knitr::kable(head(EMmodel3), caption = "Table 2. `EMmodel()` output of a trichromatic animal, showing the relative quantum catches (Qr), photoreceptor outputs (E), colour locus coordinates (X), and the chromaticity distance of stimulus in relation to the background (deltaS)")
 ```
 
-##Receptor Noise Limited Models (Vorobyev & Osorio 1998; Vorobyev et al. 1998)
+## Receptor Noise Limited Models (Vorobyev & Osorio 1998; Vorobyev et al. 1998)
 Receptor Noise Limited Model assumes that chromatic discrimination is limited by noise at the photoreceptors [@Vorobyev:1998p1813; @Vorobyev:1998p335]. Model calculation follows similar steps as in @Chittka:1992p186 and @ENDLER:2005p538, but has an additional step, namely, calculation of noise at the resultant vector, based on noise of each photoreceptor type.
 
 Photoreceptor noise is seldom measured directly. In lack of direct measurement, receptor noise (${e_i}$) can be estimated by the relative abundance of photoreceptor types in the retina, and a measurement of a single photoreceptor noise-to-signal ratio [@Vorobyev:1998p1813; @Vorobyev:1998p335]:
@@ -359,7 +359,7 @@ $$\vec{s} = \sqrt{(V  R  V^T)^{-1}}  V  \vec{p}$$
 where $\vec{s}$ is a vector which components represent stimulus colour locus coordinates, $\vec{p}$ is a vector which components represent stimulus $E$-values, and other elements are the same as in the preceding formula.
 
 
-###`RNLmodel()`
+### `RNLmodel()`
 Using the same data as in `CTTKmodel()` example:
 
 ```{r}
@@ -392,7 +392,7 @@ Model output provides photoreceptor noise (e), the relative quantum catches (Qr)
 head(RNLmodel3.2)
 ```
 
-###`RNLthres()`
+### `RNLthres()`
 @Vorobyev:1998p1813 aimed to predict discrimination threshold of monochromatic stimuli. By definition, thresholds are found when $\Delta{S} = 1$, therefore [@Vorobyev:1998p1813]:
 
 $$(1)^2 = V  \Delta\vec{p} \bullet (V  R  V^T)^{-1}   V  \Delta\vec{p}$$
@@ -428,10 +428,10 @@ The output is a `data.frame` with threshold values (`T`) and log of the sensitiv
 knitr::kable(head(thres), caption = "Table 3. `RNLthres()` output, showing wavelength (`nm`), threshold values (`T`) and log of the sensitivity values (`S`).")
 ```
 
-##Generic model
+## Generic model
 A generic function (`GENmodel`) is provided that allows calculation of alternative models based on the same assumptions of other models. Note, however, that colour locus coordinates may differ because positions of vectors used in `GENmodel` are not necessarily the same as in each model specific formula. Also, caution should be taken because models generated by `GENmodel` are not supported by experimental data.
 
-###`GENmodel()`
+### `GENmodel()`
 Worked examples:
 
 In this case, `GENmodel` is applying the same transformation  (`func=function(x){x/(1+x)}`), and the colour space has the same maximum vector length (`length=1`) as in `CTTKmodel`: 
@@ -505,14 +505,14 @@ knitr::kable(head(ANY.RNLmodel3any[,c("E1","E2","E3","X1","X2","deltaS")]), capt
 ```
 
 
-##Chromaticity distances ($\Delta$S)
+## Chromaticity distances ($\Delta$S)
 Chromaticity distances ($\Delta$S) are the Euclidean distances between points in the animal colour space. It is frequently assumed that there is a positive and linear relationship between $\Delta$S values and the probability of discrimination between two colours [although this is not necessarily the case, see @Garcia:2017hl].
 
 In `CTTKmodel`, `EMmodel`, and `GENmodel` model outputs, `deltaS` values represent the distance between the stimulus and the background. In `RNLmodel` output, `deltaS` represents the distance between `R1` and `R2`, or between `R1` and the background when `R1=Rb`.
 
 However, one may want to compute all pairwise chromaticity distance between all stimuli. This is done by the `deltaS` function.
 
-###`deltaS`
+### `deltaS`
 
 `deltaS` function will calculate a matrix with all possible pairwise comparison between stimulus reflectance spectra. 
 
@@ -532,11 +532,11 @@ corrplot(corr=dS, is.corr=FALSE)
 <br>
 <br>
 
-##Plotting models
+## Plotting models
 
 Models outputs can be easily plotted using the `plot` function, for dichromatic and trichromatic animals, or `plot3d.colourvision` (requires package `rgl`) for tetrachromatic animals. In addition, `radarplot` plots `Qr` and `E` values into a radar plot. For threshold data, `plot(model)` plots sensitivity values (ln-transformed) per wavelength.
 
-###`plot(model)`
+### `plot(model)`
 For dichromatic and trichromatic animals. Plots model specific chromaticity diagrams. For instance:
 
 @Chittka:1992p128 Hexagon for trichromatic animals:
@@ -572,7 +572,7 @@ plot(RNLmodel3, cex=0.8, pch=16, col=colours)
 <br>
 <br>
 
-###`plot(model)` for threshold values
+### `plot(model)` for threshold values
 Colour thresholds based on receptor noise limited models [@Vorobyev:1998p1813]:
 
 ```{r echo=TRUE, fig.cap="Figure 13. Threshold spectral sensitivity of a trichromatic animal (*Apis mellifera*) based on receptor noise (`RNLthres( )` function).", fig.align="center", fig.width=4, fig.height=4, out.width='300px'}
@@ -582,7 +582,7 @@ plot(thres)
 <br>
 <br>
 
-###`plot3d.colourvision(model)`
+### `plot3d.colourvision(model)`
 
 For tetrachromatic animals, `plot3d.colourvision` plots model specific 3D colour spaces. @Chittka:1992p186 model is represented by a hexagonal trapezohedron:
 <br>
@@ -600,9 +600,9 @@ library(rgl)
 plot3d.colourvision(CTTKmodel4, s.col = colours, size=4)
 ```
 ```{r echo=FALSE}
-rgl.viewpoint(theta = 30, phi = 10, zoom=0.8)
+view3d(theta = 30, phi = 10, zoom=0.8)
 rgl.snapshot("CTTKmodel4.png")
-rgl.close()
+close3d()
 ```
 ```{r echo=FALSE, dev="png", out.width='400px', fig.align="center", fig.cap = "Figure 14. @Chittka:1992p186 hexagonal trapezohedron representing the colour space boundaries of a tetrachromatic animal. Circles denotes colour locus of simulated reflectance spectra (Figure 7)."}
 knitr::include_graphics('./CTTKmodel4.png', auto_pdf = FALSE)
@@ -623,9 +623,9 @@ plot3d.colourvision(EMmodel4, s.col = colours, size=4)
 ```
 ```{r echo=FALSE}
 library(rgl)
-rgl.viewpoint(theta = 0, phi = 30, zoom=0.8)
+view3d(theta = 0, phi = 30, zoom=0.8)
 rgl.snapshot("EMmodel4.png")
-rgl.close()
+close3d()
 ```
 ```{r echo=FALSE, dev="png", out.width='400px', fig.align="center", fig.cap = "Figure 15. @ENDLER:2005p538 tetrahedron representing the colour space boundaries of a tetrachromatic animal. Circles denotes colour locus of simulated reflectance spectra (Figure 7)."}
 knitr::include_graphics('./EMmodel4.png', auto_pdf = FALSE)
@@ -645,9 +645,9 @@ par3d(windowRect=c(100,100,800,800))
 plot3d.colourvision(RNLmodel4, xlab="", ylab="", zlab="", col = colours, size=4)
 ```
 ```{r echo=FALSE}
-rgl.viewpoint(theta = 30, phi = 10, zoom=1)
+view3d(theta = 30, phi = 10, zoom=1)
 rgl.snapshot("RNLmodel4.png")
-rgl.close()
+close3d()
 ```
 ```{r echo=FALSE, dev="png", out.width='400px', fig.align="center", fig.cap = "Figure 16. Receptor Noise Limited Model colour space of a tetrachromatic animal. Circles denote colour locus of simulated reflectance spectra (Figure 7). Vectors represent photoreceptor outputs."}
 knitr::include_graphics('./RNLmodel4.png', auto_pdf = FALSE)
@@ -656,7 +656,7 @@ knitr::include_graphics('./RNLmodel4.png', auto_pdf = FALSE)
 <br>
 <br>
 
-###`radarplot(model)`
+### `radarplot(model)`
 `radarplot` plots quantum catches or $E$-values into a radar plot.
 
 ```{r echo=TRUE, fig.cap="Figure 17. Radar plot representing `CTTKmodel( )` photoreceptor inputs of a pentachromatic animal. Each polygon denotes a reflectance spectrum in Figure 7.", fig.align="center", fig.width=4, fig.height=4, out.width='300px'}
@@ -674,4 +674,4 @@ radarplot(CTTKmodel5, item="E", item.labels=TRUE, ann=FALSE, xaxt = "n", yaxt = 
 <br>
 <br>
 
-#References
+# References

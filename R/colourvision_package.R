@@ -1040,7 +1040,7 @@ EMtetrahedron <- function (x, y, z, s.col = "red", f.col = "black", vnames = c("
   
   if (requireNamespace("rgl", quietly = TRUE)) {
   
-  rgl::rgl.viewpoint(zoom = 0.75)
+  rgl::view3d(zoom = 0.75)
   rgl::plot3d(x = x, y = y, z = z, col = s.col, type = type, 
               add = add, xlab = xlab, ylab = ylab, zlab = zlab, box = box, axes = axes, 
               radius = radius, ylim = ylim, xlim = xlim,
