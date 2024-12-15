@@ -445,15 +445,40 @@ noise_e<-function (noise, e, v, n)
     }
   }
   if (noise == FALSE) {
-    if(dependent==FALSE) {
-      r <- v/sqrt(n)
+    
+    if (length(v)!=length(n)) {
+      #user provides only one v value.
+      #message("Assuming that noise refers to the most common receptor")
+      
+      n.temp<-n/max(n)
+      
+      if(dependent==FALSE) {
+        r <- v/sqrt(n.temp)
+      }
+      
+      if(dependent==TRUE) {
+        r <- sqrt( ((v^2)/n.temp)+(1/quantum) )
+      }
     }
-    if(dependent==TRUE) {
-      r <- sqrt( ((v^2)/n)+(1/quantum) )
+    
+    if (length(v)==length(n)) {
+      #users provide same number of v values as n values
+      
+      v.pos<-which(!is.na(v)==TRUE)
+      n.temp<-n/(n[[v.pos]])
+      
+      if(dependent==FALSE) {
+        r <- v[[v.pos]]/sqrt(n.temp)
+      }
+      if(dependent==TRUE) {
+        r <- sqrt( ((v[[v.pos]]^2)/n.temp)+(1/quantum) )
+      }
     }
+    
   }
   return(r)
 }
+
 
 RNLmodel <- function (model = c("linear", "log"), photo=ncol(C)-1,
                       R1, R2=Rb, Rb, I, C, noise = FALSE, v=NA, n=NA, e=NA,
@@ -494,6 +519,12 @@ RNLmodel <- function (model = c("linear", "log"), photo=ncol(C)-1,
     warning("Alternative methods are not available for animals with more than 4 photoreceptor types. `colourvision` will be used instead.", call. = FALSE)
     coord<-"colourvision"
   }
+  
+  if (noise==FALSE&length(v)!=length(n)) {
+    #user provides only one v value.
+    message("Assuming that noise refers to the most common receptor")
+  }
+  
   #internal function to be used with 'apply'
   internal <- function(model, photo, R1, R2=Rb, Rb, I, C, noise, 
                        v, n, e, interpolate, nm) {
