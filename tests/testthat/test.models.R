@@ -34,7 +34,7 @@ test_that("CTTKmodel", {
                               R=R,
                               I=D65,
                               Rb=Rb,
-                              C=bee)), 6)
+                              C=bee[,1:3])), 6)
 })
 
 
@@ -86,7 +86,7 @@ test_that("EMmodel", {
                             R=R,
                             I=D65,
                             Rb=Rb,
-                            C=bee)), 6)
+                            C=bee[,c(1,3,4)])), 6)
 })
 
 
@@ -252,7 +252,7 @@ test_that("RNLmodel", {
                              Rb=Rb,
                              C=photor(c(350,420,560)),
                              noise=F,
-                             v=0.1, n=c(1,1,5,2))), 9)
+                             v=0.1, n=c(1,1.5,2))), 9)
 })
 
 
@@ -334,7 +334,7 @@ test_that("RNLmodel", {
                              Rb=Rb,
                              C=photor(c(350,420,490,560)),
                              noise=F,
-                             v=0.1, n=c(1,1,5,2,2))), 9)
+                             v=0.1, n=c(1,1.5,2,2))), 9)
 })
 
 
@@ -639,7 +639,7 @@ test_that("RNLmodel, dichromatic, AVICOL", {
                 Rb=Rb,
                 C=photor(c(420,560)),
                 noise=F,
-                v=0.05,
+                v=c(0.05, NA),
                 n=c(1,1.77))
   expect_equal(round(model$e1, 3), 0.050)
   expect_equal(round(model$e2, 3), 0.038)
@@ -656,7 +656,7 @@ test_that("RNLmodel, dichromatic, AVICOL alternative", {
                   Rb=Rb,
                   C=photor(c(420,560)),
                   noise=F,
-                  v=0.05,
+                  v=c(0.05, NA),
                   n=c(1,1.77),
                   coord="alternative")
   expect_equal(round(model$e1, 3), 0.050)
@@ -674,7 +674,7 @@ test_that("RNLmodel, trichromatic, AVICOL", {
                   Rb=Rb,
                   C=bee,
                   noise=F,
-                  v=0.05,
+                  v=c(0.05, NA, NA),
                   n=c(1,5,10))
   expect_equal(abs(round(model$E1_R1, 3)-round(log(10^-0.366),3))<=0.002, TRUE)
   expect_equal(abs(round(model$E2_R1, 3)-round(log(10^0.171),3))<=0.002, TRUE)
@@ -693,7 +693,7 @@ test_that("RNLmodel, trichromatic, AVICOL, alternative", {
                   Rb=Rb,
                   C=bee,
                   noise=F,
-                  v=0.05,
+                  v=c(0.05, NA, NA),
                   n=c(1,5,10),
                   coord="alternative")
   expect_equal(abs(round(model$E1_R1, 3)-round(log(10^-0.366),3))<=0.002, TRUE)
@@ -713,7 +713,7 @@ test_that("RNLmodel, tetrachromatic, AVICOL, alternative", {
                    Rb=Rb,
                    C=photor(c(350,420,490,560)),
                    noise=F,
-                   v=0.05,
+                   v=c(0.05, NA, NA, NA),
                    n=c(1, 1.9, 2.2, 2.1))
     expect_equal(abs(round(model$E1_R1, 3)-round(log(10^-0.900),3))<=0.002, TRUE)
     expect_equal(abs(round(model$E2_R1, 3)-round(log(10^0.034),3))<=0.002, TRUE)
@@ -734,7 +734,7 @@ test_that("RNLmodel, tetrachromatic, AVICOL", {
                   Rb=Rb,
                   C=photor(c(350,420,490,560)),
                   noise=F,
-                  v=0.05,
+                  v=c(0.05, NA, NA, NA),
                   n=c(1, 1.9, 2.2, 2.1),
                   coord="alternative")
   expect_equal(abs(round(model$E1_R1, 3)-round(log(10^-0.900),3))<=0.002, TRUE)
