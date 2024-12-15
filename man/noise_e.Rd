@@ -16,7 +16,7 @@ Logical. Whether receptor noise is provided (\code{noise = TRUE}) or calculated 
 Receptor noise of each photoreceptor type. It is used when \code{noise = TRUE}
 }
   \item{v}{
-Noise-to-signal ratio of a single photoreceptor.
+Noise-to-signal ratio of a single photoreceptor. Either a single value or a vector of same length as \code{n}. If the former, assumes that the \code{v} value refers to the most common value in \code{n}. If the latter, the vector must have only one numeric value, and the remaining as NA (e.g., \code{v = c(NA, 0.1, NA)}).
 }
   \item{n}{
 Relative abundance of the photoreceptor in the retina.
