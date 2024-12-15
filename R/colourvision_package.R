@@ -211,9 +211,12 @@ GENmodel<-function(photo=ncol(C)-1, type="length", length=NA, edge=NA, R, I, Rb=
   ifelse(any(maxR <= 1) && max(Rb[, 2]) > 1 || any(maxR > 1) && max(Rb[, 2]) <= 1,
          yes = warning("There seems to be a problem with input files. 'R' and 'Rb' must be in the same scale. Both must be either in percentage (0-100%) or proportion (0-1).", 
                        call. = FALSE), no = "")
+  if (noise.given==FALSE) {
+    message("Relative number of each photoreceptor (n) normalised by the most common one.")
+  }
   if (noise.given==FALSE&length(v)!=length(n)) {
     #user provides only one v value.
-    message("Assuming that noise refers to the most common receptor")
+    message("Assuming that noise refers to the most common receptor.")
   }
   
 
@@ -523,6 +526,9 @@ RNLmodel <- function (model = c("linear", "log"), photo=ncol(C)-1,
   if(photo1 > 4 && coord != "colourvision"){
     warning("Alternative methods are not available for animals with more than 4 photoreceptor types. `colourvision` will be used instead.", call. = FALSE)
     coord<-"colourvision"
+  }
+  if (noise==FALSE) {
+    message("Relative number of each photoreceptor (n) normalised by the most common one.")
   }
   
   if (noise==FALSE&length(v)!=length(n)) {
