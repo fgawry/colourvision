@@ -145,8 +145,6 @@ R1[,2]<-R1[,2]+10
 RNLmodel(photo=5, model="log",
        R1=R1, R2=Rb, Rb=Rb, I=D65, C=C,
        noise=TRUE, e = c(0.13, 0.06, 0.12, 0.07, 0.08))
-}
-
 
 #3
 ## Photoreceptor sensitivity spectra
@@ -176,3 +174,4 @@ model<-RNLmodel(photo=3, model="log",
        R1=R1, R2=R2, Rb=Rb, I=D65, C=C,
        noise=FALSE, v = c(NA, 0.06, NA),
        n = c(1,2,2))
+}
