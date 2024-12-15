@@ -549,7 +549,7 @@ RNLmodel <- function (model = c("linear", "log"), photo=ncol(C)-1,
     noise_values<-vector(length=photo1)
     if (dependent == FALSE) {
       for (i in 1:photo1) {
-        noise_values[[i]]<-noise_e(noise = noise, e = e[[i]], v = v, n = n[[i]])
+        noise_values[[i]]<-noise_e(noise = noise, e = e[[i]], v = v, n = n)[[i]]
       }
     }
     
@@ -1144,7 +1144,7 @@ RNLthres <-function (photo=ncol(C)-1,
   noise_values<-vector(length=photo1)
   if (dependent == FALSE) {
     for (i in 1:photo1) {
-      noise_values[[i]]<-noise_e(noise = noise, e = e[[i]], v = v, n = n[[i]])
+      noise_values[[i]]<-noise_e(noise = noise, e = e[[i]], v = v, n = n)[[i]]
     }
   }
   
