@@ -216,7 +216,7 @@ GENmodel<-function(photo=ncol(C)-1, type="length", length=NA, edge=NA, R, I, Rb=
   }
   if (noise.given==FALSE&length(v)!=length(n)) {
     #user provides only one v value.
-    message("Assuming that noise refers to the most common receptor.")
+    message("The model assumes that noise refers to the most common receptor.")
   }
   
 
@@ -456,7 +456,7 @@ noise_e<-function (noise, e, v, n)
     
     if (length(v)!=length(n)) {
       #user provides only one v value.
-      #message("Assuming that noise refers to the most common receptor")
+      #message("The model assumes that noise refers to the most common receptor.")
       
       n.temp<-n/max(n)
       
@@ -533,7 +533,7 @@ RNLmodel <- function (model = c("linear", "log"), photo=ncol(C)-1,
   
   if (noise==FALSE&length(v)!=length(n)) {
     #user provides only one v value.
-    message("Assuming that noise refers to the most common receptor")
+    message("The model assumes that noise refers to the most common receptor.")
   }
   
   #internal function to be used with 'apply'
