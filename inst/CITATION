@@ -1,0 +1,10 @@
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+
+bibentry(bibtype = "Article",
+         title = "Color Vision Models: Some simulations, a general n-dimensional model, and the {colourvision} R package",
+         author = person(given=c("Felipe", "Malheiros"), family="Gawryszewski"),
+         year = 2018,
+         doi= "10.1002/ece3.4288",
+         note = note,
+         journal= "Ecology and Evolution")

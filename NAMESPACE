@@ -1,0 +1,6 @@
+exportPattern("^[[:alpha:]]+")
+importFrom("graphics", "plot", "points", "segments", "polygon", "text", "arrows")
+importFrom("stats", "approx", "smooth.spline", "sd")
+importFrom("utils", "combn")
+importFrom("Matrix", "solve")
+S3method(plot, colourvision)
