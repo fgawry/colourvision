@@ -1,9 +1,8 @@
 colourvision v2.1.0
 =================
-1. Changed how receptor noise is calculated when noise=FALSE to avoid misespecification by users (relevant for the RNLmodel function). Now it divides the n value by their maximum before futher calcultions.
+1. Changed how receptor noise is calculated when noise=FALSE to avoid misspecification by users (relevant for the RNLmodel function). Now it divides the n value by their maximum before further calculations.
 2. Updated the vignette presentation.
 3. Updated deprecated rgl functions.
-
 
 colourvision v2.0.4
 =================
