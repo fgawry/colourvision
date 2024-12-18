@@ -4,13 +4,11 @@ Title: Colour Vision Models
 Version: 2.1.0
 Date: 2024-12-15
 Author: Felipe M. Gawryszewski
-Authors@R: c(
-  person(given = c("Felipe"),
-         family = "Gawryszewski",
-         role = c("aut", "cre"),
-         email = "f.gawry@gmail.com",
-         comment = c(ORCID = "0000-0002-3072-5518"))
-)
+Authors@R: person(given = c("Felipe"),
+            family = "Gawryszewski",
+            role = c("aut", "cre"),
+            email = "f.gawry@gmail.com",
+            comment = c(ORCID = "0000-0002-3072-5518"))
 Maintainer: Felipe Malheiros Gawrysewski <f.gawry@gmail.com>
 Description: Colour vision models, colour spaces and colour thresholds. Provides flexibility to build user-defined colour vision models for n number of photoreceptor types. Also includes Vorobyev & Osorio (1998) Receptor Noise Limited models <doi:10.1098/rspb.1998.0302>, Chittka (1992) colour hexagon <doi:10.1007/BF00199331>, and Endler & Mielke (2005) model <doi:10.1111/j.1095-8312.2005.00540.x>. Models have been extended to accept any number of photoreceptor types. 
 License: GPL-2
