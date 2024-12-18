@@ -16,7 +16,7 @@ CIE Standard Illuminant D65. Datum has already been converted to quantum flux (u
   }
 }
 \source{
-\url{http://www.cie.co.at/}
+\url{https://www.cie.co.at}
 }
 \examples{
 data("D65")
