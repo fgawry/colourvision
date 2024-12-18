@@ -212,7 +212,7 @@ GENmodel<-function(photo=ncol(C)-1, type="length", length=NA, edge=NA, R, I, Rb=
          yes = warning("There seems to be a problem with input files. 'R' and 'Rb' must be in the same scale. Both must be either in percentage (0-100%) or proportion (0-1).", 
                        call. = FALSE), no = "")
   if (noise.given==FALSE) {
-    message("Relative number of each photoreceptor (n) normalised by the most common one.")
+    message("Relative number of each photoreceptor (n) normalised by the most common one. This may generate different results compared to colourvision < v2.1.0")
   }
   if (noise.given==FALSE&length(v)!=length(n)) {
     #user provides only one v value.
@@ -528,7 +528,7 @@ RNLmodel <- function (model = c("linear", "log"), photo=ncol(C)-1,
     coord<-"colourvision"
   }
   if (noise==FALSE) {
-    message("Relative number of each photoreceptor (n) normalised by the most common one.")
+    message("Relative number of each photoreceptor (n) normalised by the most common one. This may generate different results compared to colourvision < v2.1.0")
   }
   
   if (noise==FALSE&length(v)!=length(n)) {
@@ -1140,6 +1140,14 @@ RNLthres <-function (photo=ncol(C)-1,
                                          call. = FALSE), no = "")
   ifelse(any(ncol(Rb) > 2), yes = warning("'Rb' argument with more than two columns. Only the first two will be used.", 
                                           call. = FALSE), no = "")
+  if (noise==FALSE) {
+    message("Relative number of each photoreceptor (n) normalised by the most common one. This may generate different results compared to colourvision < v2.1.0")
+  }
+  
+  if (noise==FALSE&length(v)!=length(n)) {
+    #user provides only one v value.
+    message("The model assumes that noise refers to the most common receptor.")
+  }
 
   #Rb photon catch
   SRb<-vector(length=photo1)
