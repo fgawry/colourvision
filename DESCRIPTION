@@ -2,7 +2,7 @@ Package: colourvision
 Type: Package
 Title: Colour Vision Models
 Version: 2.1.0
-Date: 2024-12-15
+Date: 2024-12-19
 Author: Felipe M. Gawryszewski
 Authors@R: person(given = c("Felipe"),
             family = "Gawryszewski",
