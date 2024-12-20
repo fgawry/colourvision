@@ -374,7 +374,7 @@ Model above calculates $\Delta$S values based on noise measured at *Apis mellife
 ```{r}
 
 RNLmodel3.1<-RNLmodel(model="log", photo=3, R1=R, Rb=Rb, I=D65, C=bee,
-                    noise=FALSE, n=c(1,2,1), v=0.1)
+                    noise=FALSE, n=c(0.5,1,0.5), v=0.1)
 ```
 
 
@@ -391,6 +391,28 @@ Model output provides photoreceptor noise (e), the relative quantum catches (Qr)
 ```{r, echo=TRUE}
 head(RNLmodel3.2)
 ```
+
+
+### `RNLachrom()`
+For achromatic contrast calculation (single photoreceptor), use the \code{RNLachrom} function:
+
+```{r}
+
+RNLmodel.achrom<-RNLachrom(R1=R,Rb=Rb,I=D65,C=bee[,c(1,4)],e=0.16)
+
+```
+
+The Weber achromatic contrast for a single photoreceptor is calculated by:
+\deqn{\Delta S = |\frac{\ln(Qr_1)-\ln(Qr_2)}{e}|}{}
+
+where \eqn{Qr_1} and \eqn{Qr_2} are the relative photoreceptor quantum catches from stimulus 1 (\code{R1}) and stimulus 2 (\code{R2}).
+
+Model output provides photoreceptor noise (e), the relative quantum catches (Qr), photoreceptor outputs (E), and the achromatic distance (deltaS) of the first stimulus in relation to the second stimulus (against the background when `R1=Rb`).
+
+```{r, echo=TRUE}
+head(RNLmodel.achrom)
+```
+
 
 ### `RNLthres()`
 @Vorobyev:1998p1813 aimed to predict discrimination threshold of monochromatic stimuli. By definition, thresholds are found when $\Delta{S} = 1$, therefore [@Vorobyev:1998p1813]:
