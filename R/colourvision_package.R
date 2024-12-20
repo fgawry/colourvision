@@ -216,7 +216,7 @@ GENmodel<-function(photo=ncol(C)-1, type="length", length=NA, edge=NA, R, I, Rb=
   }
   if (noise.given==FALSE&length(v)!=length(n)) {
     #user provides only one v value.
-    message("The model assumes that noise refers to the most common receptor.")
+    message("The model assumes that noise (v) refers to the most common receptor.")
   }
   
 
@@ -443,6 +443,7 @@ EMmodel <- function (photo=ncol(C)-1,
 noise_e<-function (noise, e, v, n) 
 {
   dependent<-FALSE
+  
   quantum<-NULL
   if (noise == TRUE) {
     if(dependent==FALSE) {
@@ -459,7 +460,7 @@ noise_e<-function (noise, e, v, n)
       #message("The model assumes that noise refers to the most common receptor.")
       
       n.temp<-n/max(n)
-      
+
       if(dependent==FALSE) {
         r <- v/sqrt(n.temp)
       }
@@ -474,7 +475,7 @@ noise_e<-function (noise, e, v, n)
       
       v.pos<-which(!is.na(v)==TRUE)
       n.temp<-n/(n[[v.pos]])
-      
+
       if(dependent==FALSE) {
         r <- v[[v.pos]]/sqrt(n.temp)
       }
@@ -500,6 +501,25 @@ RNLmodel <- function (model = c("linear", "log"), photo=ncol(C)-1,
   if (photo=="tri") {photo1<-3}
   if (photo=="tetra") {photo1<-4}
   if (photo=="penta") {photo1<-5}
+  
+  #RUN ACHROMATIC CONTRAST WHEN
+  if (photo1 == 1) {
+    if (noise == FALSE) {
+      warning("For achromatic contrast calculations (single photoreceptor), use 'noise = TRUE'")
+    }
+    if (model == "linear" ) {
+      warning("For achromatic contrast calculations (single photoreceptor), use 'model = 'log''")
+    }
+    if (noise == TRUE&model == "log") {
+      message("Estimating the Weber achromatic contrast for a single photoreceptor using the RNLachrom function.")
+    
+      r<-RNLachrom(R1 = R1, R2=R2, Rb=Rb, I=I, C=C,
+                   e=e,
+                   interpolate = interpolate, nm = nm)
+      return(r)
+    }
+  } else {
+    
   
   #warnings
   ifelse(photo1 != nphoto, yes = warning("Argument 'C' has a number of sensitivity curves different than argument 'photo'.", 
@@ -533,8 +553,9 @@ RNLmodel <- function (model = c("linear", "log"), photo=ncol(C)-1,
   
   if (noise==FALSE&length(v)!=length(n)) {
     #user provides only one v value.
-    message("The model assumes that noise refers to the most common receptor.")
+    message("The model assumes that noise (v) refers to the most common receptor.")
   }
+  
   
   #internal function to be used with 'apply'
   internal <- function(model, photo, R1, R2=Rb, Rb, I, C, noise, 
@@ -682,6 +703,7 @@ RNLmodel <- function (model = c("linear", "log"), photo=ncol(C)-1,
   attr(r, "coord") <- coord
   
   return(r)
+  }
 }
 
 
@@ -1146,7 +1168,7 @@ RNLthres <-function (photo=ncol(C)-1,
   
   if (noise==FALSE&length(v)!=length(n)) {
     #user provides only one v value.
-    message("The model assumes that noise refers to the most common receptor.")
+    message("The model assumes that noise (v) refers to the most common receptor.")
   }
 
   #Rb photon catch

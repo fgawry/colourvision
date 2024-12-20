@@ -19,7 +19,7 @@ RNLmodel(model = c("linear", "log"), photo=ncol(C)-1,
 \code{model="linear"} can be used only if comparison is to be made between two very similar colours.
 }
   \item{photo}{
-Number of photoreceptor types. Model accepts any number of photoreceptor types (\code{>=2}). For instance, dichromatic: \code{photo=2}; trichromatic: \code{photo=3}; tetrachromatic: \code{photo=4}, etc. Default gets number of photoreceptor types from \code{C} argument.
+Number of photoreceptor types. Model accepts any number of photoreceptor types (\code{>=2}). For instance, dichromatic: \code{photo=2}; trichromatic: \code{photo=3}; tetrachromatic: \code{photo=4}, etc. Default gets number of photoreceptor types from \code{C} argument. If only a single photoreceptor is provided (e.g., \code{photo = 1}, uses the \code{\link{RNLachrom}} function for achromatic contrast calculations.
 }
   \item{R1}{
 Reflectance of observed objects. A data frame with first column corresponding to wavelength values and following columns with reflectance values. \code{R1} must be in the same scale as \code{R2} and \code{Rb}(percentage or proportion).
@@ -90,7 +90,7 @@ Vorobyev, M., D. Osorio, A. T. D. Bennett, N. J. Marshall, and I. C. Cuthill. 19
 Felipe M. Gawryszewski \email{f.gawry@gmail.com}
 }
 \seealso{
-\code{\link{photor}}, \code{\link{RNLthres}}, \code{\link{CTTKmodel}}, \code{\link{EMmodel}}, \code{\link{GENmodel}}
+\code{\link{RNLachrom}}, \code{\link{photor}}, \code{\link{RNLthres}}, \code{\link{CTTKmodel}}, \code{\link{EMmodel}}, \code{\link{GENmodel}}
 }
 \examples{
 #1

@@ -921,4 +921,10 @@ test_that("deltaS", {
   
 })
 
+test_that("noise_e", {
+  
+  e_values<-noise_e(noise=FALSE, v=c(NA,NA,NA,0.1), n=c(1, 3, 4.2, 4))
+  expect_equal(round(e_values[[1]],4), 0.2)
+  
+})
 

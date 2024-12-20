@@ -1,7 +1,9 @@
 # colourvision v2.1.0
-1. Changed how receptor noise is calculated when noise=FALSE to avoid misspecification by users (relevant for the RNLmodel function). Now it divides the n value by their maximum before further calculations.
+1. Changed how receptor noise is calculated when noise=FALSE to avoid misspecification by users (relevant for the RNLmodel and RNLthres functions). Now the n values are divided by their maximum before further calculations.
 2. Updated the vignette presentation.
 3. Updated deprecated rgl functions.
+4. Added a function to calculate Weber achromatic contrasts (RNLachrom).
+
 
 # colourvision v2.0.4
 1. Fixed a minor bug with 'mar' argument in the EMtetrahedron function.
@@ -31,6 +33,7 @@
 6.deltaS( ). New function to calculate a matrix of euclidean distances based on colour vision model outputs.
 7.radarplot( ). New function to plot quantum catches and photoreceptor outputs into a radar plot.
 8.RNLmodel(model="log", ...) has been fixed. It now uses log(base=exp(1)) instead of log10.
+
 
 # colourvision v1.1
 1. Fixed a bug in RNLmodel that miscalculated deltaS values for animals with > 4 photoreceptors types.
