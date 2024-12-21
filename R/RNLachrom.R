@@ -64,13 +64,8 @@ RNLachrom <- function(R1, R2=Rb, Rb, I, C, e,
         noise_values<-noise_values[[1]]
     }
     
-    #∆fi=ln[qi(spec1)/qi(spec2)] = ln(1+∆qi/qi(spec2)] = ∆qi/qi(spec2)
-    #(q1/q2 - q2/q2 + 1)
-    #(q1-q2)/q2 + 1
-    
-    #log(2.1/2) #Linear se q1 similar a q2
-    #(2.1-2)/2
-    
+    #deltafi=ln[qi(spec1)/qi(spec2)] = ln(1+deltaqi/qi(spec2)] = deltaqi/qi(spec2)
+
     if (model == "log") {
       if (contrast=="Weber") {
         delta_f<- S1 - S2
@@ -89,7 +84,7 @@ RNLachrom <- function(R1, R2=Rb, Rb, I, C, e,
       }
     }
     
-    #∆S = |∆fi/ω|
+    #deltaS = |deltafi/w|
     
     if (contrast=="Weber") {
       deltaS<-abs(delta_f)/noise_values
