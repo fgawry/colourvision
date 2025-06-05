@@ -86,11 +86,11 @@ Q<-function (R, I, C, interpolate, nm)
     ifelse(any(test == FALSE), yes = stop("Uneven number of rows. Use 'interpolate=TRUE'.", 
                                           call. = FALSE), no = "")
     ifelse(any(c(R[, 1] == I[, 1], R[, 1] == C[, 1], I[, 
-                                                       1] == C[, 1])) == FALSE, yes = stop("Different wavelenght values of model parameters. Use 'interpolate=TRUE'.", 
+                                                       1] == C[, 1])) == FALSE, yes = stop("Different wavelength values of model parameters. Use 'interpolate=TRUE'.", 
                                                                                            call. = FALSE), no = "")
     a <- R[, 1]
     b <- R[2:length(R[, 1]), 1]
-    ifelse(sd(b - a[1:length(a) - 1], na.rm = T) != 0, yes = stop("Uneven wavelenght intervals. Use 'interpolate=TRUE'.", 
+    ifelse(sd(b - a[1:length(a) - 1], na.rm = T) != 0, yes = stop("Uneven wavelength intervals. Use 'interpolate=TRUE'.", 
                                                                   call. = FALSE), no = "")
   }
   int<-abs(R[2, 1]-R[1, 1])
